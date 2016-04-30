@@ -384,12 +384,16 @@ int job(void)
         {
             // TotalJobsMissed Duration EndTime Deadline
             // Job parameters are most recent missed task
-            fprintf(fp,"%s %d %llu %llu %llu\n", 
-                myName,
-                missedJobs, 
-                endTime, 
-                currentBudget, 
-                pCtrlPage->deadline);
+            // fprintf(fp,"%s %d %llu %llu %llu\n", 
+            //     myName,
+            //     missedJobs, 
+            //     endTime, 
+            //     currentBudget, 
+            //     pCtrlPage->deadline);
+            // fclose(fp);
+            fprintf(fp,"{\n\t"DeadlinesMissed": %d\n}\n", 
+
+                missedJobs);
             fclose(fp);
         }
         else

@@ -391,7 +391,7 @@ int job(void)
             //     currentBudget, 
             //     pCtrlPage->deadline);
             // fclose(fp);
-            fprintf(fp,"{\n\t"DeadlinesMissed": %d\n}\n", 
+            fprintf(fp,'{\n\t"DeadlinesMissed": %d\n}\n', 
 
                 missedJobs);
             fclose(fp);

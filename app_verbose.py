@@ -157,13 +157,14 @@ if __name__ == "__main__":
 
 			for lines in inLines:
 				try:
-					data={}
-					data["Application name"]=lines.split()[0]
-					data["Mode name"]=lines.split()[1]
-					data["Periods"]=[int(lines.split()[3])]
-					data["ExecTime"]=[int(lines.split()[2])]
+					if lines.split()[0]!="#":
+						data={}
+						data["Application name"]=lines.split()[0]
+						data["Mode name"]=lines.split()[1]
+						data["Periods"]=[int(lines.split()[3])]
+						data["ExecTime"]=[int(lines.split()[2])]
 
-					applicationModes.append(json.dumps(data))
+						applicationModes.append(json.dumps(data))
 
 					
 				except:

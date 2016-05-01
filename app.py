@@ -72,11 +72,11 @@ def changeTask():
 		applicationIndex = applicationIndex + 1
 		print '\t',mode,'\t',appName
 		if preious_mode == 0:
-			with open('/dev/shm/vmMon/'+str(applicationIndex),'w') as j_file:
+			with open('/dev/shm/vmMon/'+appName,'w') as j_file:
 				json.dump(data,j_file,indent=2)
 			preious_mode = int(mode)
 		elif preious_mode != int(mode):
-			with open('/dev/shm/vmMon/'+str(applicationIndex),'w') as j_file:
+			with open('/dev/shm/vmMon/'+appName,'w') as j_file:
 				json.dump(data,j_file,indent=2)
 			preious_mode = int(mode)			
 
@@ -159,8 +159,8 @@ if __name__ == "__main__":
 					data={}
 					data["Application name"]=lines.split()[0]
 					data["Mode name"]=lines.split()[1]
-					data["Periods"]=[int(lines.split()[2])]
-					data["ExecTime"]=[int(lines.split()[3])]
+					data["Periods"]=[int(lines.split()[3])]
+					data["ExecTime"]=[int(lines.split()[2])]
 
 					applicationModes.append(json.dumps(data))
 

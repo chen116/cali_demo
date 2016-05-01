@@ -20,7 +20,7 @@ function cali_kalman {
   j=0
   DESIRED_WCET=$1
   BASE=20000
-  fft_size_or_iter=$(($KALMAN_BASE * $BASE))
+  fft_size_or_iter=$(($KALMAN_BASE + $BASE))
   while true; do
 
     echo "Starting st_trace"
@@ -128,7 +128,7 @@ function cali_sar {
 
   j=0
   DESIRED_WCET=$1
-  BASE=512
+  BASE=4
   fft_size_or_iter=$(($FFT_BASE * $BASE))
   while true; do
 

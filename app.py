@@ -71,7 +71,6 @@ def changeTask():
 		duration = 1
 		applicationIndex = applicationIndex + 1
 		print '\t',mode
-		print '\t',newDuration
 		if preious_mode == 0:
 			with open('/dev/shm/vmMon/'+str(applicationIndex),'w') as j_file:
 				json.dump(data,j_file,indent=2)

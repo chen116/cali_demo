@@ -54,7 +54,7 @@ def changeTask():
 # 	# Stop old tasks
 	for x in xrange(0,len(applicationModes) ):
 		kill_tasks()
-		time.sleep(3)
+		time.sleep(2)
 		changeSched('Linux')
 
 
@@ -89,8 +89,6 @@ def changeTask():
 		# 	value=str(totalMissed),\
 		# 	resource_id=myUUID,token=myToken, metaData=newTaskPayload)
 
-	# 	# Sleep for a bit
-		time.sleep(3)
 
 	# 	# Start new tasks
 		startTasks(execTime,periods,duration,mode,appName)

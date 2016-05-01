@@ -246,7 +246,6 @@ void fft(cplx buf[], int n)
 
 void kalman(int iter)
 {
-
 //initial values for the kalman filter 
     float x_est_last = 0;
     float P_last = 0; 
@@ -257,13 +256,13 @@ void kalman(int iter)
     float K; 
     float P; 
     float P_temp; 
-    float x_temp_est; 
-    float x_est; 
-    float z_measured; //the 'noisy' value we measured
+    float x_temp_est=0; 
+    float x_est=0; 
+    float z_measured=0; //the 'noisy' value we measured
     float z_real = 0.5; //the ideal value we wish to measure
     float sum_error_kalman = 0;
     float sum_error_measure = 0;
-	int i;     
+    int i;     
     srand(0); 
      
     //initialize with a measurement 
@@ -277,7 +276,7 @@ void kalman(int iter)
         //calculate the Kalman gain 
         K = P_temp * (1.0/(P_temp + R));
         //measure 
-        z_measured = z_real + frand()*0.09; //the real measurement plus noise
+        z_measured = z_real + frand()*0.05; //the real measurement plus noise
         //correct 
         x_est = x_temp_est + K * (z_measured - x_temp_est);  
         P = (1- K) * P_temp; 
@@ -294,7 +293,10 @@ void kalman(int iter)
         P_last = P; 
         x_est_last = x_est; 
 }
- //printf("kalman with: %6.3f \n",z_real); 
+        // printf ("myName: %s\n",myName);
+        // printf("Ideal    position: %6.3f \n",z_real); 
+        // printf("Mesaured position: %6.3f [diff:%.3f]\n",z_measured,fabs(z_real-z_measured)); 
+        // printf("Kalman   position: %6.3f [diff:%.3f]\n",x_est,fabs(z_real - x_est)); 
 return;
 
 

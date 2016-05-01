@@ -25,6 +25,7 @@ exitEvent = threading.Event()
 taskObjs = []
 applicationModes = []
 applicationIndex = 0
+preious_mode = 0
 
 # # ***** Get resource ID of this VM *****
 # myUUID = util.getInstanceUUID()
@@ -42,7 +43,7 @@ signal.signal(signal.SIGINT, handleSIGINT)
 
 
 def changeTask():
-	global applicationIndex
+	global applicationIndex,preious_mode
 	# Report value
 	# Authenticate
 	# myToken = util.getKeystoneTokenV3(keystoneAddress)
@@ -51,10 +52,11 @@ def changeTask():
 	print "Changing Taskset"
 
 # 	# Stop old tasks
-	kill_tasks()
-	time.sleep(.10)
-	changeSched('Linux')
 	for x in xrange(0,len(applicationModes) ):
+		kill_tasks()
+		time.sleep(1)
+		changeSched('Linux')
+
 
 		if applicationIndex >= len(applicationModes):
 			print "Done with application!"
@@ -62,11 +64,22 @@ def changeTask():
 			sys.exit(0)
 		applicationModes_j = json.loads(applicationModes[applicationIndex])
 		print type(applicationModes_j)
+		appName = applicationModes_j["Application name"]
 		mode = applicationModes_j["Mode name"]
-		newDuration = applicationModes_j["ExecTime"]
+		periods = applicationModes_j["Periods"][0]
+		execTime = applicationModes_j["ExecTime"][0]
+		duration = 1
 		applicationIndex = applicationIndex + 1
 		print '\t',mode
 		print '\t',newDuration
+		if preious_mode == 0:
+			with open('/dev/shm/vmMon/'+str(applicationIndex),'w') as j_file:
+				json.dump(data,j_file,indent=2)
+			preious_mode = int(mode)
+		elif preious_mode != int(mode)
+			with open('/dev/shm/vmMon/'+str(applicationIndex),'w') as j_file:
+				json.dump(data,j_file,indent=2)
+			preious_mode = int(mode)			
 
 	# 	# Report back to nova
 		# totalMissed = 1
@@ -78,10 +91,10 @@ def changeTask():
 		# 	resource_id=myUUID,token=myToken, metaData=newTaskPayload)
 
 	# 	# Sleep for a bit
-		time.sleep(10)
+		time.sleep(3)
 
 	# 	# Start new tasks
-		startTasks(mode,newDuration)
+		startTasks(execTime,periods,duration,mode,appName)
 
 # 	# Start next timer
 	# currentTimer = threading.Timer(mode,changeTask)
@@ -114,24 +127,22 @@ def changeTask():
 def changeSched(sched):
 	subprocess.call(['/root/liblitmus/setsched',sched])
     
-def startTasks(mode,duration):
+def startTasks(execTime,periods,duration,mode,appName):
 	changeSched('GSN-EDF')
-	with open('/dev/shm/vmMon/mode','w') as j_file:
-		json.dump(data,j_file,indent=4)
     #argv  1. wcet(ms) 2. period(ms) 3. duration(s) 4. mode (1 for cali sar, 4 for cali kalman) 5. appName 6. size/iter
 
 	for taskID in xrange(0,1):
 			myoutput = open(str(mode), 'w')
-			taskObjs.append( subprocess.Popen(["/root/liblitmus/base_task",
-				str(1),
-				str(1),
-				mode,
+			taskObjs.append( subprocess.Popen(["./myapp",
+				str(execTime),
+				str(execTime),
 				str(duration),
-				'-w',
+				mode,
+				appName,
 				'&'
 				],stdout=myoutput)
 			)
-	time.sleep(10)
+	time.sleep(5)
 	subprocess.call(["/root/liblitmus/release_ts"])
 
 

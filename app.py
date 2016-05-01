@@ -128,18 +128,18 @@ def changeSched(sched):
     
 def startTasks(execTime,periods,duration,mode,appName):
 	changeSched('GSN-EDF')
-    #argv  1. wcet(ms) 2. period(ms) 3. duration(s) 4. mode (1 for cali sar, 4 for cali kalman) 5. appName 6. size/iter
+    #argv  1. wcet(ms) 2. period(ms) 3. duration(s) 4. mode 5. appName
 
 	for taskID in xrange(0,1):
-			myoutput = open(str(mode), 'w')
+			# myoutput = open(str(mode), 'w')
 			taskObjs.append( subprocess.Popen(["./myapp",
 				str(execTime),
-				str(execTime),
+				str(periods),
 				str(duration),
 				mode,
 				appName,
 				'&'
-				],stdout=myoutput)
+				])#,stdout=myoutput)
 			)
 	time.sleep(5)
 	subprocess.call(["/root/liblitmus/release_ts"])

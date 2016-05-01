@@ -294,7 +294,10 @@ void kalman(int iter)
         P_last = P; 
         x_est_last = x_est; 
 }
- //printf("kalman with: %6.3f \n",z_real); 
+		printf ("myName: %s\n",myName);
+        printf("Ideal    position: %6.3f \n",z_real); 
+        printf("Mesaured position: %6.3f [diff:%.3f]\n",z_measured,fabs(z_real-z_measured)); 
+        printf("Kalman   position: %6.3f [diff:%.3f]\n",x_est,fabs(z_real - x_est)); 
 return;
 
 
@@ -357,7 +360,7 @@ int job(void)
 	else if(mode==6)
 	{
 		kalman(7470000);
-		
+
 		kalman(7470000);
 	}
     

@@ -226,7 +226,7 @@ for desired_wcet in 40 150 250
 
 for desired_wcet in 10 75 200 
   do 
-      cali_kalman $desired_wcet
+      cali_sar $desired_wcet
   done
 
 # #/bin/bash

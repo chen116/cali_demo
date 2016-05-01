@@ -259,7 +259,7 @@ void kalman(int iter)
     float P_temp; 
     float x_temp_est=0; 
     float x_est=0; 
-    float z_measure=0; //the 'noisy' value we measured
+    float z_measured=0; //the 'noisy' value we measured
     float z_real = 0.5; //the ideal value we wish to measure
     float sum_error_kalman = 0;
     float sum_error_measure = 0;

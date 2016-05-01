@@ -76,7 +76,7 @@ def changeTask():
 			with open('/dev/shm/vmMon/'+str(applicationIndex),'w') as j_file:
 				json.dump(data,j_file,indent=2)
 			preious_mode = int(mode)
-		elif preious_mode ~= int(mode)
+		elif preious_mode != int(mode):
 			with open('/dev/shm/vmMon/'+str(applicationIndex),'w') as j_file:
 				json.dump(data,j_file,indent=2)
 			preious_mode = int(mode)			

@@ -1,6 +1,6 @@
 #/bin/bash
 
-KALMAN_BASE=20000
+KALMAN_BASE=10000000
 FFT_BASE=512
 
 
@@ -85,7 +85,7 @@ function cali_kalman {
     overshoot=$(head -n 1 overshoot)
     if [ "$overshoot" == "1" ]
       then 
-        KALMAN_BASE=$(fft_size_or_iter)
+        KALMAN_BASE=$fft_size_or_iter
         fft_size_or_iter=$(($fft_size_or_iter - $BASE))
         echo "see a overshoot, final loop count: $fft_size_or_iter"
         echo desired_wcet ms: "$DESIRED_WCET" >> result
@@ -194,7 +194,7 @@ function cali_sar {
     overshoot=$(head -n 1 overshoot)
     if [ "$overshoot" == "1" ]
       then 
-        FFT_BASE=$(fft_size_or_iter)
+        FFT_BASE=$fft_size_or_iter
         fft_size_or_iter=$(($fft_size_or_iter - $BASE))
         echo "see a overshoot, final loop count: $fft_size_or_iter"
         echo desired_wcet ms: "$DESIRED_WCET" >> result

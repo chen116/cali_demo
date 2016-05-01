@@ -54,7 +54,7 @@ def changeTask():
 # 	# Stop old tasks
 	for x in xrange(0,len(applicationModes) ):
 		kill_tasks()
-		time.sleep(1)
+		time.sleep(3)
 		changeSched('Linux')
 
 
@@ -143,6 +143,7 @@ def startTasks(execTime,periods,duration,mode,appName):
 			)
 	time.sleep(5)
 	subprocess.call(["/root/liblitmus/release_ts"])
+	time.sleep(8)
 
 
 

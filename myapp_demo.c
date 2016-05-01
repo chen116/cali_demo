@@ -347,20 +347,14 @@ int job(void)
 	}
 	else if(mode==4)
 	{
-		kalman(7470000);
-
 		kalman(1170000);
 	}
 	else if(mode==5)
 	{
-		kalman(7470000);
-
 		kalman(4470000);
 	}
 	else if(mode==6)
 	{
-		kalman(7470000);
-
 		kalman(7470000);
 	}
     

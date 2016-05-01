@@ -26,7 +26,7 @@ taskObjs = []
 applicationModes = []
 applicationIndex = 0
 preious_mode = 0
-
+glb_duration = 1
 # # ***** Get resource ID of this VM *****
 # myUUID = util.getInstanceUUID()
 # meterName = meterName + "_" + myUUID
@@ -43,7 +43,7 @@ signal.signal(signal.SIGINT, handleSIGINT)
 
 
 def changeTask():
-	global applicationIndex,preious_mode
+	global applicationIndex,preious_mode,glb_duration
 	# Report value
 	# Authenticate
 	# myToken = util.getKeystoneTokenV3(keystoneAddress)
@@ -68,7 +68,7 @@ def changeTask():
 		mode = applicationModes_j["Mode name"]
 		periods = applicationModes_j["Periods"][0]
 		execTime = applicationModes_j["ExecTime"][0]
-		duration = 1
+		duration = glb_duration
 		applicationIndex = applicationIndex + 1
 		print '\t',mode,'\t',appName
 		if preious_mode == 0:
